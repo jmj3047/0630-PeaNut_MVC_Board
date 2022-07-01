@@ -1,4 +1,4 @@
-package com.vam.persistence;
+package com.peanut.persistence;
 
 import static org.junit.Assert.fail;
 

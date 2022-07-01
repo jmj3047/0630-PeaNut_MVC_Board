@@ -5,4 +5,4 @@
  * @author home
  *
  */
-package com.vam.persistence;
+package com.peanut.persistence;
