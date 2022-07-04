@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 자바 interface의 함수와 실행할 query를 매핑시켜주는 역할을 함
+자바의 함수를 호출하면 해당하는 쿼리가 실행됨 -->
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.peanut.mapper.BoardMapper"> 
+	
+	<!-- 게시판 등록 -->
+    <insert id="enroll">
+        <!-- 인자로 전달받은 dto의 getter함수를 자동으로 호출해서 매핑 -->
+        insert into peanut_board(title, content, writer) values (#{title}, #{content}, #{writer})
+        
+    </insert>
+ 
+  </mapper>
+ 
