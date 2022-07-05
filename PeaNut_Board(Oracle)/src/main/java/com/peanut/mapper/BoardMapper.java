@@ -13,4 +13,7 @@ public interface BoardMapper { //mybatis를 사용하기 위해서 어떤 함수
     
     /* 게시판 조회 */
     public BoardVO getPage(int bno);
+    
+    /* 게시판 수정 */
+    public int modify(BoardVO board);
 }
