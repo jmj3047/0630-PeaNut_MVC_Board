@@ -46,6 +46,14 @@
     
     </select>
     
+     <!-- 게시물 총 개숫 -->
+    <select id="getTotal" resultType="int">
+    
+        select count(*) from peanut_board
+    
+    </select>
+    
+    
     <!-- 게시판 수정 -->
     <update id="modify">
         

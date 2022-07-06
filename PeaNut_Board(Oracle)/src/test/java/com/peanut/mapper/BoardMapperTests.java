@@ -87,18 +87,30 @@ public class BoardMapperTests {
 	 * 
 	 * }
 	 */
+
+	/*
+	 * 게시판 목록(페이징 적용)테스트
+	 * 
+	 * @Test public void testGetListPaging() {
+	 * 
+	 * Criteria cri = new Criteria();
+	 * 
+	 * cri.setPageNum(3);
+	 * 
+	 * List list = mapper.getListPaging(cri);
+	 * 
+	 * list.forEach(board -> log.info("" + board)); }
+	 */
 	
-	/* 게시판 목록(페이징 적용)테스트 */
+	/* 게시판 전체 글 의 수 가져오기 테스트 */
     @Test
-    public void testGetListPaging() {
+    public void testGetTotal() {
         
-        Criteria cri = new Criteria();
         
-        cri.setPageNum(3);
+        int total = mapper.getTotal();
+        log.info("등록된 총 글의 수는 :"+total);
                          
-        List list = mapper.getListPaging(cri);
         
-        list.forEach(board -> log.info("" + board));
     }
 
 }

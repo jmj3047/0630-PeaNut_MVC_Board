@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.peanut.model.BoardVO;
 import com.peanut.model.Criteria;
+import com.peanut.model.PageMakerDTO;
 import com.peanut.service.BoardService;
 
 @Controller
@@ -36,15 +37,25 @@ public class BoardController {
 	 * }
 	 */
 	
-	/* 게시판 목록 페이지 접속(페이징 적용) */
+    /* 게시판 목록 페이지 접속(페이징 적용) */
     @GetMapping("/list")
-    public void boardListGET(Model model, Criteria cri) {
+    public String boardListGET(Model model, Criteria cri) {
         
         log.info("boardListGET");
         
         model.addAttribute("list", bservice.getListPaging(cri));
         
-    }
+        int total = bservice.getTotal();
+        
+        PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+        
+        model.addAttribute("pageMaker", pageMake);
+        
+        return "/board/list";
+        
+		/* return "redirect:/board/list"; */
+        
+    } 
 	
 	/* 게시판 등록 페이지 접속 */
 	@GetMapping("/enroll")
