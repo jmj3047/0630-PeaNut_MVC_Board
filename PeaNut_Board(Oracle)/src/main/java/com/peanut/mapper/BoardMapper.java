@@ -16,4 +16,7 @@ public interface BoardMapper { //mybatis를 사용하기 위해서 어떤 함수
     
     /* 게시판 수정 */
     public int modify(BoardVO board);
+    
+    /* 게시판 삭제 */
+    public int delete(int bno);
 }

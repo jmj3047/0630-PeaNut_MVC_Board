@@ -34,6 +34,13 @@
         <!-- Oracle -->    
         update peanut_board set title = #{title}, content = #{content}, updatedate = sysdate where bno = #{bno}
     </update>
+    
+    <!-- 게시판 삭제 -->
+    <delete id="delete">
+    
+        delete from peanut_board where bno = #{bno}
+    
+    </delete>
  
   </mapper>
  
