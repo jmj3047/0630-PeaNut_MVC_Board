@@ -1,5 +1,9 @@
 package com.peanut.service;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -8,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.peanut.model.BoardVO;
+import com.peanut.model.Criteria;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -67,12 +71,27 @@ public class BoardServiceTests {
 	 * 
 	 * }
 	 */
-	 /* 게시판 삭제 */
+	/*
+	 * 게시판 삭제
+	 * 
+	 * @Test public void testDelete() {
+	 * 
+	 * int result = service.delete(22); log.info("result : " + result);
+	 * 
+	 * }
+	 */
+	
+
+    /* 게시판 조회(페이징 적용) */
     @Test
-    public void testDelete() {
+    public void testGetListPaging() {
         
-        int result = service.delete(22);
-        log.info("result : " + result);
+        Criteria cri = new Criteria();
+        
+        List list = service.getListPaging(cri);
+        
+        list.forEach(board -> log.info("" + board));
+        
         
     }
 

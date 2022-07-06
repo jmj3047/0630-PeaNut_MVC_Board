@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.peanut.mapper.BoardMapper;
 import com.peanut.model.BoardVO;
+import com.peanut.model.Criteria;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -59,5 +60,12 @@ public class BoardServiceImpl implements BoardService{
        
        return mapper.delete(bno);
    }  
+   
+   /* 게시판 목록(페이징 적용) */
+   @Override
+   public List<BoardVO> getListPaging(Criteria cri) {
+       
+       return mapper.getListPaging(cri);
+   }    
 
 }
