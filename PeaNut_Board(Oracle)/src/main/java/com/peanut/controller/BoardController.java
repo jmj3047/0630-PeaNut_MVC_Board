@@ -40,7 +40,8 @@ public class BoardController {
     /* 게시판 목록 페이지 접속(페이징 적용) */
     @GetMapping("/list")
     public String boardListGET(Model model, Criteria cri) {
-        
+        //화면에서 넘어온 name과 controller에서 쓰는 변수의 이름이 카멜케이스로 변환한것이 같으면 자동매핑됨
+    	//Criteria에는 pageNum이 있고, get.jsp에선 bno가 있음
         log.info("boardListGET");
         
         model.addAttribute("list", bservice.getListPaging(cri));
@@ -82,17 +83,21 @@ public class BoardController {
 
 	/* 게시판 조회 */
 	@GetMapping("/get")
-	public void boardGetPageGET(int bno, Model model) {
+	public void boardGetPageGET(int bno, Model model, Criteria cri) {
 
 		model.addAttribute("pageInfo", bservice.getPage(bno));
+
+		model.addAttribute("cri", cri);
 
 	}
 
 	/* 수정 페이지 이동 */
 	@GetMapping("/modify")
-	public void boardModifyGET(int bno, Model model) {
+	public void boardModifyGET(int bno, Model model, Criteria cri) {
 
 		model.addAttribute("pageInfo", bservice.getPage(bno));
+		
+		model.addAttribute("cri", cri);
 
 	}
 

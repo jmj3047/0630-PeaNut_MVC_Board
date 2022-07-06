@@ -175,6 +175,7 @@ thead {
 		
 		e.preventDefault();
         moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+        //name이 pageNum인 input태그의 값에다가 그 href 값으로 대입
         moveForm.attr("action", "/board/list");
         moveForm.submit();
  
