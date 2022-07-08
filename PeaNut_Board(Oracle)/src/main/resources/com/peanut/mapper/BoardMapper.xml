@@ -7,6 +7,29 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.peanut.mapper.BoardMapper"> 
 	
+	 <!-- 검색 조건문 -->
+    <sql id="criteria">
+        <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                        <when test="type == 'T'.toString()">
+                            title like '%'||#{keyword}||'%' 
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            content like '%'||#{keyword}||'%' 
+                        </when>
+                        <when test="type == 'W'.toString()">
+                            writer like '%'||#{keyword}||'%' 
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    
+    </sql>
+ 
+	
 	<!-- 게시판 등록 -->
     <insert id="enroll">
         <!-- 인자로 전달받은 dto의 getter함수를 자동으로 호출해서 매핑 -->
@@ -29,29 +52,44 @@
     </select>
     
     <!-- Oracle -->
-    <!-- 게시물 목록(페이징) -->
+     <!-- 게시물 목록(페이징) -->
     <select id="getListPaging" resultType="com.peanut.model.BoardVO">
     
     <![CDATA[
         
         select bno, title, content, writer, regdate, updatedate from(
         
-                select rownum as rn, bno, title, content, writer, regdate, updatedate
+                select /*+INDEX_DESC(peanut_board pk_board) */ rownum  as rn, bno, title, content, writer, regdate, updatedate
                   
-                from peanut_board where rownum <= #{pageNum} * #{amount}) 
-                
+                from peanut_board where rownum <= #{pageNum} * #{amount} 
+    ]]>            
+                <if test="keyword != null">
+                    <include refid="criteria"></include> 
+                </if>
+    
+    <![CDATA[
+                    
+                )
+                    
         where rn > (#{pageNum} -1) * #{amount}
     
     ]]>
     
     </select>
-    
-     <!-- 게시물 총 개숫 -->
+ 
+ 
+    <!-- 게시물 총 개숫 -->
     <select id="getTotal" resultType="int">
     
         select count(*) from peanut_board
+        
+        <if test="keyword != null">
+        
+            where bno > 0 <include refid="criteria"></include>
+        
+        </if>
     
-    </select>
+    </select>    
     
     
     <!-- 게시판 수정 -->

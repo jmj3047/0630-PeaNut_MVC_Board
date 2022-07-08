@@ -102,15 +102,15 @@ public class BoardMapperTests {
 	 * list.forEach(board -> log.info("" + board)); }
 	 */
 	
-	/* 게시판 전체 글 의 수 가져오기 테스트 */
-    @Test
-    public void testGetTotal() {
-        
-        
-        int total = mapper.getTotal();
-        log.info("등록된 총 글의 수는 :"+total);
-                         
-        
-    }
+//	/* 게시판 전체 글 의 수 가져오기 테스트 */
+//    @Test
+//    public void testGetTotal() {
+//        
+//        
+//        int total = mapper.getTotal();
+//        log.info("등록된 총 글의 수는 :"+total);
+//                         
+//        
+//    }
 
 }

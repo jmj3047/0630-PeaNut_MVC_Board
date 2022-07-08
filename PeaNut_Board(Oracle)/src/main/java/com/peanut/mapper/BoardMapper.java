@@ -30,5 +30,5 @@ public interface BoardMapper { //mybatis를 사용하기 위해서 어떤 함수
     //위 함수 정의에 대한 약속
     
     /* 게시글 총 갯수 */
-    public int getTotal();
+    public int getTotal(Criteria cri);
 }
