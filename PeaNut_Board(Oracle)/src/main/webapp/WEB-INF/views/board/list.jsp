@@ -83,7 +83,9 @@ thead {
      width: 100px;
     height: 36px;
   }
-  
+  .search_area select{
+  	height: 35px;
+  }
 </style>
 
 </head>
@@ -156,7 +158,8 @@ thead {
       
       	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
         <input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-         <input type="hidden" name="keyword" value="${pageMaker.cri.keyword }"> 
+         <input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+         <input type="hidden" name="type" value="${pageMaker.cri.type }"> 
         
       </form>
    </div>
@@ -213,13 +216,27 @@ thead {
         
     });
 	
-	$(".search_area button").on("click", function(e){
-        e.preventDefault();
-        let val = $("input[name='keyword']").val();
-        moveForm.find("input[name='keyword']").val(val);
-        moveForm.find("input[name='pageNum']").val(1);
-        moveForm.submit();
-    });
+	 $(".search_area button").on("click", function(e){
+	        e.preventDefault();
+	        
+	        let type = $(".search_area select").val();
+	        let keyword = $(".search_area input[name='keyword']").val();
+	        
+	        if(!type){
+	            alert("검색 종류를 선택하세요.");
+	            return false;
+	        }
+	        
+	        if(!keyword){
+	            alert("키워드를 입력하세요.");
+	            return false;
+	        }        
+	        
+	        moveForm.find("input[name='type']").val(type);
+	        moveForm.find("input[name='keyword']").val(keyword);
+	        moveForm.find("input[name='pageNum']").val(1);
+	        moveForm.submit();
+	    });
  
 </script>
 </body>
